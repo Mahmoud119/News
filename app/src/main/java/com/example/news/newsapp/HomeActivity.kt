@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.news.R
 import com.example.news.databinding.ActivityHomeBinding
+import com.example.news.newsapp.ui.NewsFragment
 
 class HomeActivity : AppCompatActivity() {
     lateinit var viewBinding: ActivityHomeBinding
