@@ -1,0 +1,45 @@
+package com.example.news.newsapp.ui
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.news.R
+import com.example.news.databinding.ItemNewsBinding
+import com.example.news.newsapp.api.model.NewsResponse.News
+
+class NewsAdapter(var newsList: List<News?>? =null): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemNewsBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(newsList?.get(position))
+    }
+
+    override fun getItemCount(): Int = newsList?.size ?: 0 // if null return 0
+
+    class ViewHolder(val binding : ItemNewsBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind(news: News?){
+            binding.titleTv.text = news?.title
+            binding.authorTv.text = "By : ${news?.author}"
+            binding.dateTimeTv.text = news?.publishedAt
+
+            Glide.with(binding.root)
+                .load(news?.urlToImage)
+                .error(R.drawable.img)
+                .into(binding.newsImage)
+
+        }
+    }
+
+    fun changeData( newslist : List<News?>?){
+        this.newsList = newsList
+        notifyDataSetChanged()
+    }
+}

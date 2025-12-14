@@ -14,11 +14,10 @@ class ApiManager {
 
       private fun initRetrofit(): Retrofit{
           if (retrofit==null){
-              val loggingInterceptor = HttpLoggingInterceptor(
-                  { message: String->
-                      Log.e("api",message)
-                  }
-              )
+              val loggingInterceptor = HttpLoggingInterceptor { message: String ->
+                  Log.e("api", message)
+              }
+              loggingInterceptor.level= HttpLoggingInterceptor.Level.BODY
               val okHttpClient = OkHttpClient.Builder()
                   .addInterceptor(loggingInterceptor).build()
               retrofit = Retrofit.Builder()

@@ -5,4 +5,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Light_grey">#FF808080</color>
     <color name="transparent">#00000000</color>
+    <color name="light_grey">#A0A0A0</color>
 </resources>
