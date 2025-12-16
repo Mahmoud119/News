@@ -3,6 +3,7 @@ package com.example.news.newsapp.api
 
 import android.R.id.message
 import android.util.Log
+import com.example.news.newsapp.api.interceptors.AuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,9 +18,12 @@ class ApiManager {
               val loggingInterceptor = HttpLoggingInterceptor { message: String ->
                   Log.e("api", message)
               }
-              loggingInterceptor.level= HttpLoggingInterceptor.Level.BODY
+              loggingInterceptor.level= HttpLoggingInterceptor.Level.HEADERS
               val okHttpClient = OkHttpClient.Builder()
-                  .addInterceptor(loggingInterceptor).build()
+                  .addInterceptor(loggingInterceptor)
+                  .addInterceptor(AuthInterceptor())
+                  .build()
+
               retrofit = Retrofit.Builder()
                   .client(okHttpClient)
                   .baseUrl("https://newsapi.org/")
