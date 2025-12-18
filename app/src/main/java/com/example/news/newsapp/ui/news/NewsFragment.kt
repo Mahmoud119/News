@@ -1,4 +1,4 @@
-package com.example.news.newsapp.ui
+package com.example.news.newsapp.ui.news
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -10,11 +10,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.news.databinding.FragmentNewsBinding
 import com.example.news.newsapp.api.ApiManager
-import com.example.news.newsapp.api.model.NewsResponse.NewsResponse
-import com.example.news.newsapp.api.model.ErrorResponse
-import com.example.news.newsapp.api.model.NewsResponse.News
-import com.example.news.newsapp.api.model.sourcesResponse.Source
-import com.example.news.newsapp.api.model.sourcesResponse.SourcesResponse
+import com.example.news.newsapp.model.Category
+import com.example.news.newsapp.model.NewsResponse.NewsResponse
+import com.example.news.newsapp.model.ErrorResponse
+import com.example.news.newsapp.model.NewsResponse.News
+import com.example.news.newsapp.model.sourcesResponse.Source
+import com.example.news.newsapp.model.sourcesResponse.SourcesResponse
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
 import retrofit2.Call
@@ -22,6 +23,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class NewsFragment : Fragment() {
+    companion object{
+        fun getInstance(category: Category): NewsFragment{
+            val fragment = NewsFragment()
+            fragment.category = category
+            return fragment
+        }
+    }
+   lateinit var category : Category
     lateinit var viewBinding: FragmentNewsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +53,7 @@ class NewsFragment : Fragment() {
     private fun loadSources() {
         // loading status
         showLoading()
-        ApiManager.webServices().getSources().enqueue(object : Callback<SourcesResponse> {
+        ApiManager.webServices().getSources(category.id).enqueue(object : Callback<SourcesResponse> {
             override fun onResponse( // any request from the server
                 call: Call<SourcesResponse?>,
                 response: Response<SourcesResponse?>

@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/activity_home"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
-<FrameLayout
-    android:id="@+id/fragment_container"
+    android:background="@color/black_primary">
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/categories_rv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:listitem="@layout/item_cat"
     />
 </androidx.constraintlayout.widget.ConstraintLayout>
