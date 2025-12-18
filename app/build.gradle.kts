@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -61,4 +63,11 @@ dependencies {
     implementation(libs.logging.interceptor)
     //Glide
     implementation(libs.glide)
+    //viewModel
+
+    // ViewModel
+    implementation (libs.androidx.lifecycle.viewmodel.ktx.v2100)
+    //LiveData
+    implementation(libs.androidx.lifecycle.livedata.ktx.v2100)
+    implementation(libs.androidx.fragment.ktx)
 }
