@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import com.example.news.databinding.FragmentNewsBinding
 import com.example.news.newsapp.common.ErrorState
 import com.example.news.newsapp.model.Category
-import com.example.news.newsapp.model.NewsResponse.News
+import com.example.news.newsapp.model.News
 import com.example.news.newsapp.model.sourcesResponse.Source
 import com.google.android.material.tabs.TabLayout
 

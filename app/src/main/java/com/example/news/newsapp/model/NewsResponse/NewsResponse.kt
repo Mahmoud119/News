@@ -2,6 +2,7 @@ package com.example.news.newsapp.model.NewsResponse
 
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import com.example.news.newsapp.model.News
 import com.google.gson.annotations.SerializedName
 
 @Parcelize

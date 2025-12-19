@@ -2,19 +2,18 @@ package com.example.news.newsapp.api
 
 import com.example.news.newsapp.model.NewsResponse.NewsResponse
 import com.example.news.newsapp.model.sourcesResponse.SourcesResponse
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WebServices {
 
     @GET("v2/top-headlines/sources")
-    fun getSources(
+   suspend fun getSources(
         @Query("category")
-        catId: String): Call<SourcesResponse>
+        catId: String): SourcesResponse
 
     @GET("v2/everything")
-    fun getNews(
+    suspend fun getNews(
         @Query ("sources") source:String?
-    ): Call<NewsResponse>
+    ): NewsResponse
 }
