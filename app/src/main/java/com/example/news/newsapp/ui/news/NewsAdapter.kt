@@ -26,16 +26,11 @@ class NewsAdapter(var newsList: List<News?>? =null): RecyclerView.Adapter<NewsAd
 
     class ViewHolder(val binding : ItemNewsBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(news: News?){
-            binding.titleTv.text = news?.title
-            binding.authorTv.text = "By : ${news?.author}"
-            binding.dateTimeTv.text = news?.publishedAt
+            binding.nesItem= news
+            binding.executePendingBindings()
 
-            Glide.with(binding.root)
-                .load(news?.urlToImage)
-                .error(R.drawable.img)
-                .into(binding.newsImage)
 
-        }
+         }
     }
 
     fun changeData( newslist : List<News?>?){

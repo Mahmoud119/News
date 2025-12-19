@@ -64,6 +64,7 @@ class NewsFragment : Fragment() {
         })
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer{
             newsList->
+            
             bindNewsList(newsList)
         })
     }
