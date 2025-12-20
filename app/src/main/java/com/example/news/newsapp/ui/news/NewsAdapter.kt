@@ -3,8 +3,8 @@ package com.example.news.newsapp.ui.news
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.models.News
 import com.example.news.databinding.ItemNewsBinding
-import com.example.news.newsapp.model.News
 
 class NewsAdapter(var newsList: List<News?>? =null): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

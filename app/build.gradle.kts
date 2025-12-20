@@ -56,14 +56,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(project(":Domain"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    //RetroFit
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    //okhttp
-    implementation(libs.logging.interceptor)
+
     //Glide
     implementation(libs.glide)
     //viewModel

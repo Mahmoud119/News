@@ -1,12 +1,10 @@
 package com.example.news.newsapp
 
-import android.R.attr.fragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.news.R
 import com.example.news.databinding.ActivityHomeBinding
-import com.example.news.newsapp.model.Category
+import com.example.news.newsapp.models.Category
 import com.example.news.newsapp.ui.categories.CategoriesFragment
 import com.example.news.newsapp.ui.news.NewsFragment
 

@@ -5,16 +5,17 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.news.newsapp.api.ApiManager
+import com.example.domain.domain.GetNewsUseCase
+import com.example.domain.domain.GetSourcesUseCase
+import com.example.domain.models.News
+import com.example.domain.models.Source
 import com.example.news.newsapp.common.ErrorState
 import com.example.news.newsapp.model.ErrorResponse
-import com.example.news.newsapp.model.News
-import com.example.news.newsapp.model.sourcesResponse.Source
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-class NewsViewModel : ViewModel() {
+class NewsViewModel (private val getSourcesUseCase: GetSourcesUseCase,private val getNewsUseCase: GetNewsUseCase): ViewModel() {
     val showLoading = MutableLiveData<Boolean>(false)
     val errorState = MutableLiveData<ErrorState>()
     val sourcesLiveData = MutableLiveData<List<Source?>?>()
@@ -25,8 +26,8 @@ class NewsViewModel : ViewModel() {
         showLoading.value = true
         viewModelScope.launch {
             try {
-                val response = ApiManager.webServices().getSources(categoryId)
-                sourcesLiveData.postValue(response.sources)
+                val response = getSourcesUseCase.getSources(categoryId)
+                sourcesLiveData.postValue(response)
             } catch (exception: Exception) {
                 Log.d(TAG, "onFailure: ")
                 errorState.postValue(
@@ -36,16 +37,6 @@ class NewsViewModel : ViewModel() {
                             loadSources(categoryId)
                         })
                 )
-            } catch (httpException: HttpException) {
-                //handl error view
-                val errorResponse = extractError(httpException)
-                val message = errorResponse.message ?: "Something Went Wrong"
-
-                errorState.value = ErrorState(
-                    errorMessage = message,
-                    onRetry = {
-                        loadSources(categoryId)
-                    })
             }
         }
 
@@ -54,9 +45,9 @@ class NewsViewModel : ViewModel() {
         showLoading.value = true
         try {
             viewModelScope.launch {
-                val response = ApiManager.webServices().getNews(source = sourceId)
+                val response = getNewsUseCase.invoke(sourceId)
                 showLoading.value = false
-                newsLiveData.value = response.newsList
+                newsLiveData.postValue(response)
             }
         } catch (exception: Exception) {
             Log.d(TAG, "onFailure: ")
@@ -67,15 +58,6 @@ class NewsViewModel : ViewModel() {
                         loadNews(sourceId)
                     })
             )
-        } catch (httpException: HttpException) {
-            val errorResponse = extractError(httpException)
-            val message = errorResponse.message ?: "Something Went Wrong"
-
-            errorState.value = ErrorState(
-                errorMessage = message,
-                onRetry = {
-                    loadNews(sourceId)
-                })
         }
 
     }

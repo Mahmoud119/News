@@ -7,7 +7,7 @@
 
         <variable
             name="nesItem"
-            type="com.example.news.newsapp.model.News" />
+            type="com.example.domain.models.News" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -82,7 +82,7 @@
                 android:maxLines="1"
                 android:textColor="@color/light_grey"
                 android:textSize="16sp"
-                android:text="@{nesItem.publishedAt}"
+                    android:text="@{nesItem.publishedAt}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_tv"

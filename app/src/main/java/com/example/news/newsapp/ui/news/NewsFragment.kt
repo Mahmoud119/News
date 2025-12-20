@@ -13,8 +13,8 @@ import androidx.lifecycle.Observer
 import com.example.news.databinding.FragmentNewsBinding
 import com.example.news.newsapp.common.ErrorState
 import com.example.news.newsapp.model.Category
-import com.example.news.newsapp.model.News
-import com.example.news.newsapp.model.sourcesResponse.Source
+import com.example.news.newsapp.model.NewsResponse.NewsDTO
+import com.example.news.newsapp.model.sourcesResponse.SourceDTO
 import com.google.android.material.tabs.TabLayout
 
 
@@ -70,7 +70,7 @@ class NewsFragment : Fragment() {
     }
 
 
-    private fun bindTabLayout(sources: List<Source?>?) {
+    private fun bindTabLayout(sources: List<SourceDTO?>?) {
         viewBinding.loadingView.isVisible = false
         viewBinding.errorView.isVisible = false
         sources?.forEach { source ->
@@ -83,14 +83,14 @@ class NewsFragment : Fragment() {
         viewBinding.sourcesTabs.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    val source = tab?.tag as Source?
+                    val source = tab?.tag as SourceDTO?
                     source?.id
                     source?.id?.let { viewModel.loadNews(it) }
                 }
 
 
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-                    val source = tab?.tag as Source?
+                    val source = tab?.tag as SourceDTO?
                     source?.id
                     source?.id?.let { viewModel.loadNews(it) }
                 }
@@ -105,7 +105,7 @@ class NewsFragment : Fragment() {
 
 
     val adapter = NewsAdapter()
-    private fun bindNewsList(newsList: List<News?>?) {
+    private fun bindNewsList(newsList: List<NewsDTO?>?) {
 
         adapter.newsList = newsList
         adapter.changeData(newsList)
